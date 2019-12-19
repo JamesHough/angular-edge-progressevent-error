@@ -53,7 +53,7 @@ app.use('/api/v1/sample', sample);
 
 app.use(busboy());
 
-app.post('/upload', function(req, res) {
+app.post('/api/excel-reader-api/api/ReadColumnHeaders', function(req, res) {
   if (req.busboy) {
     req.busboy.on('file', function(
       fieldName,

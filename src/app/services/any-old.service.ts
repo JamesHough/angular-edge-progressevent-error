@@ -43,7 +43,8 @@ export class AnyOldService {
 
     const uploadReq = new HttpRequest(
       'POST',
-      'http://localhost:3000/upload',
+      //// 'http://localhost:3000/api/excel-reader-api/api/ReadColumnHeaders',
+      'http://remote-server-name:3000/api/excel-reader-api/api/ReadColumnHeaders',
       formData,
       {
         reportProgress: progressEnabled,
