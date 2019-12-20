@@ -5,77 +5,13 @@
     <title>EdgeHttpGetProgresseventError</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <script type="text/javascript">
-      function ajaxSuccess() {
-        console.log(this.responseText);
-      }
-
-      function getDecendantElementByName(element, name) {
-        if (element === null || element === undefined || !name) {
-          return null;
-        }
-
-        if (element.name === name) {
-          return element;
-        }
-
-        let found = null;
-        for (let i = 0; i < element.childNodes.length; i++) {
-          found = getDecendantElementByName(element.childNodes[i], name);
-
-          if (found) {
-            return found;
-          }
-        }
-
-        return null;
-      }
-
-      function AJAXSubmit(f) {
-        let data = new FormData();
-        data.append(
-          'file',
-          getDecendantElementByName(f, 'file').files[0],
-          'file-name-here.dat'
-        );
-
-        let ajaxReq = new XMLHttpRequest();
-        ajaxReq.onload = ajaxSuccess;
-        ajaxReq.open('POST', f.action);
-
-        if (f.enctype === 'multipart/form-data') {
-          /* enctype is  */
-          let sBoundary =
-            '---------------------------' + Date.now().toString(16);
-
-          ajaxReq.setRequestHeader(
-            'Content-Type',
-            'multipart/form-data; boundary=' + sBoundary
-          );
-
-          ajaxReq.sendAsBinary(
-            '--' +
-              sBoundary +
-              '\r\n' +
-              data.segments.join('--' + sBoundary + '\r\n') +
-              '--' +
-              sBoundary +
-              '--\r\n'
-          );
-        } else {
-          ajaxReq.setRequestHeader('Content-Type', f.enctype);
-          ajaxReq.send(
-            data.segments.join(f.enctype === 'text/plain' ? '\r\n' : '&')
-          );
-        }
-      }
-    </script>
+    <script type="text/javascript" src="assets/mozilla-ajax.js"></script>
   </head>
   <body>
     <form
       method="POST"
       onsubmit="AJAXSubmit(this); return false;"
-      action="http://slbappprd128v:3000/api/excel-reader-api/api/ReadColumnHeaders"
+      action="http://localhost:3000/api/excel-reader-api/api/ReadColumnHeaders"
       enctype="multipart/form-data"
     >
       <h3>Simple HTML Upload (No Angular)</h3>
